@@ -19,6 +19,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,11 +63,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("here")
-    }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -85,8 +82,13 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let selectedRow = tableView.indexPathForSelectedRow
+        let cell = tableView.cellForRow(at: selectedRow!) as! ExerciseTableViewCell
+        
+        let exerciseGraphDetailVC:ExerciseGraphDetailViewController = segue.destination as! ExerciseGraphDetailViewController
+         exerciseGraphDetailVC.setPassedExercisesInfo(name:cell.exerciseName.text!, subtitle: cell.exerciseSubtitle.text!, predictedOneRepMax:cell.exercisePredictedOneRepMax.text!)
+        exerciseGraphDetailVC.setAllExercises(exercises:exercises)
+        
     }
 
 

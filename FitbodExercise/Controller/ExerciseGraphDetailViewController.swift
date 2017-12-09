@@ -10,26 +10,32 @@ import UIKit
 
 class ExerciseGraphDetailViewController: UIViewController {
 
+    @IBOutlet weak var exerciseName: UILabel!
+    @IBOutlet weak var exerciseSubtitle: UILabel!
+    @IBOutlet weak var exercisePredictedOneRepMax: UILabel!
+    
+    var exercises = [Exercise]()
+    var displayExerciseName:String!
+    var displayExerciseSubtitle:String!
+    var displayExercisePredictedOneRepMax:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        exerciseName.text = displayExerciseName
+        exerciseSubtitle.text = displayExerciseSubtitle
+        exercisePredictedOneRepMax.text = displayExercisePredictedOneRepMax
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func setPassedExercisesInfo(name:String, subtitle:String, predictedOneRepMax:String){
+        self.displayExerciseName = name
+        self.displayExerciseSubtitle = subtitle
+        self.displayExercisePredictedOneRepMax = predictedOneRepMax
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setAllExercises(exercises:[Exercise]){
+        self.exercises = exercises
     }
-    */
 
 }
