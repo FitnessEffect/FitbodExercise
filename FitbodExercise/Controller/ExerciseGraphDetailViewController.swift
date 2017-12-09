@@ -16,7 +16,6 @@ class ExerciseGraphDetailViewController: UIViewController{
     @IBOutlet weak var exerciseSubtitle: UILabel!
     @IBOutlet weak var exercisePredictedOneRepMax: UILabel!
     
-    var relevantExercises = [Exercise]()
     var lineChartEntry = [ChartDataEntry]()
     var xAxisFormatDelegate: IAxisValueFormatter?
     
@@ -29,21 +28,21 @@ class ExerciseGraphDetailViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        relevantExercises.removeAll()
+        ExerciseManager.shared.removeAllRelevantExercises()
         
         exerciseName.text = ExerciseManager.shared.passedCellName
         exerciseSubtitle.text = ExerciseManager.shared.passedCellSubtitle
         exercisePredictedOneRepMax.text = ExerciseManager.shared.passedCellTheoreticalOneRepMax
         
         //filter exercises by exercise names
-        relevantExercises = Calculations.retrieveRelevantExercises(name: exerciseName.text!, exercises: ExerciseManager.shared.exercises)
+        ExerciseManager.shared.retrieveRelevantExercises()
         
         //reverse array order of exercise from oldest to newest
-        relevantExercises = relevantExercises.reversed()
+        ExerciseManager.shared.setRelevantExercises(relevantExercises:ExerciseManager.shared.relevantExercises.reversed())
         
-        createChart(exercises: relevantExercises)
+        createChart(exercises: ExerciseManager.shared.relevantExercises)
     }
-
+    
     func createChart(exercises:[Exercise]){
         lineChartEntry.removeAll()
         chartView.chartDescription?.text = ""
@@ -81,6 +80,6 @@ class ExerciseGraphDetailViewController: UIViewController{
 //xAxisFormatDelegate
 extension ExerciseGraphDetailViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return String(describing: relevantExercises[Int(value)].date!)
+        return String(describing: ExerciseManager.shared.relevantExercises[Int(value)].date!)
     }
 }

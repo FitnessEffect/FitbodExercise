@@ -17,14 +17,4 @@ class Calculations{
     static func calculateTheoreticalOneRepMax(weight:String, reps:String)->Double{
         return Double(weight)!*((36/(37-Double(reps)!)))
     }
-    
-    static func retrieveRelevantExercises(name:String, exercises:[Exercise])->[Exercise]{
-        var relevantExercises = [Exercise]()
-        for exercise in exercises{
-            if exercise.name == name{
-                relevantExercises.append(exercise)
-            }
-        }
-        return relevantExercises
-    }
 }

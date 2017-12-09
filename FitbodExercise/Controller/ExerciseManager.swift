@@ -17,8 +17,14 @@ class ExerciseManager{
     private var _passedCellName = String()
     private var _passedCellSubtitle = String()
     private var _passedCellTheoreticalOneRepMax = String()
+    private var _relevantExercises = [Exercise]()
     
-    private init(){
+    func retrieveRelevantExercises(){
+        for exercise in _exercises{
+            if exercise.name == _passedCellName{
+                _relevantExercises.append(exercise)
+            }
+        }
     }
     
     func appendExerciseToExercises(exercise:Exercise){
@@ -33,6 +39,10 @@ class ExerciseManager{
         _uniqueExerciseNames.removeAll()
     }
     
+    func removeAllRelevantExercises(){
+        _relevantExercises.removeAll()
+    }
+    
     func setPassedCellName(cellName:String){
         _passedCellName = cellName
     }
@@ -43,6 +53,10 @@ class ExerciseManager{
     
     func setPassedCellTheoreticalOneRepMax(cellTheoreticalOneRepMax:String){
         _passedCellTheoreticalOneRepMax = cellTheoreticalOneRepMax
+    }
+    
+    func setRelevantExercises(relevantExercises:[Exercise]){
+        _relevantExercises = relevantExercises
     }
     
     var passedCellName:String{
@@ -75,4 +89,9 @@ class ExerciseManager{
         }
     }
     
+    var relevantExercises:[Exercise]{
+        get{
+            return _relevantExercises
+        }
+    }
 }
