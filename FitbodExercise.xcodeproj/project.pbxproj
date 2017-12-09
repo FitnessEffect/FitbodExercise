@@ -14,6 +14,7 @@
 		5240247C1FDB9CB40095E6CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5240247A1FDB9CB40095E6CD /* LaunchScreen.storyboard */; };
 		524024871FDB9CB40095E6CD /* FitbodExerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524024861FDB9CB40095E6CD /* FitbodExerciseTests.swift */; };
 		524024931FDBA1AE0095E6CD /* workoutData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 524024921FDBA1AE0095E6CD /* workoutData.txt */; };
+		524024961FDBA33C0095E6CD /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524024951FDBA33C0095E6CD /* Exercise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		524024861FDB9CB40095E6CD /* FitbodExerciseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitbodExerciseTests.swift; sourceTree = "<group>"; };
 		524024881FDB9CB40095E6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		524024921FDBA1AE0095E6CD /* workoutData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = workoutData.txt; sourceTree = "<group>"; };
+		524024951FDBA33C0095E6CD /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		524024701FDB9CB40095E6CD /* FitbodExercise */ = {
 			isa = PBXGroup;
 			children = (
+				524024941FDBA3290095E6CD /* Model */,
 				524024911FDBA1930095E6CD /* Data */,
 				524024711FDB9CB40095E6CD /* AppDelegate.swift */,
 				524024731FDB9CB40095E6CD /* ViewController.swift */,
@@ -105,6 +108,14 @@
 				524024921FDBA1AE0095E6CD /* workoutData.txt */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		524024941FDBA3290095E6CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				524024951FDBA33C0095E6CD /* Exercise.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +224,7 @@
 			files = (
 				524024741FDB9CB40095E6CD /* ViewController.swift in Sources */,
 				524024721FDB9CB40095E6CD /* AppDelegate.swift in Sources */,
+				524024961FDBA33C0095E6CD /* Exercise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
