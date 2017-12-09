@@ -74,6 +74,7 @@ class ExerciseGraphDetailViewController: UIViewController{
         let data = LineChartData()
         data.addDataSet(line1)
         chartView.data = data
+        data.setValueFormatter(MyValueFormatter())
     }
 }
 
@@ -81,5 +82,12 @@ class ExerciseGraphDetailViewController: UIViewController{
 extension ExerciseGraphDetailViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return String(describing: ExerciseManager.shared.relevantExercises[Int(value)].date!)
+    }
+}
+
+class MyValueFormatter:NSObject, IValueFormatter{
+    //removes label for each data point
+    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+        return ""
     }
 }

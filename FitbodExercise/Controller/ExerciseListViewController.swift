@@ -30,6 +30,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                 let file = fullText.components(separatedBy: CharacterSet.newlines)
                 ExerciseManager.shared.removeAllUniqueExercises()
                 for line in file {
+                    //reads each line from file and skips empty lines
                     if line != " " && line != ""{
                         let exerciseData = line.components(separatedBy: ",")
                         let tempExercise = Exercise(date: exerciseData[0], name: exerciseData[1], sets: exerciseData[2], reps: exerciseData[3], weight: exerciseData[4])
@@ -99,5 +100,3 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
         ExerciseManager.shared.setPassedCellTheoreticalOneRepMax(cellTheoreticalOneRepMax: cell.exercisePredictedOneRepMax.text!)
     }
 }
-
-
