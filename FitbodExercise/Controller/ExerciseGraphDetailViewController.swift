@@ -53,12 +53,16 @@ class ExerciseGraphDetailViewController: UIViewController {
         chartView.xAxis.drawLabelsEnabled = true
         chartView.xAxis.axisMinimum = 0.0
         chartView.xAxis.axisMaximum = Double(exercises.count+1)
-        chartView.xAxis.labelCount = exercises.count
+        chartView.xAxis.labelCount = 10
         chartView.legend.enabled = false
         chartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
         chartView.leftAxis.labelFont = UIFont(name: "Avenir", size: 15)!
+        chartView.leftAxis.labelTextColor = UIColor.white
         chartView.rightAxis.labelFont = UIFont(name: "Avenir", size: 15)!
+        chartView.rightAxis.labelTextColor = UIColor.white
         chartView.xAxis.labelFont = UIFont(name: "Avenir", size: 15)!
+        chartView.xAxis.labelTextColor = UIColor.white
+        chartView.backgroundColor = UIColor.black
         
         for x in 0...exercises.count-1{
             let dataEntry = ChartDataEntry(x: Double(x), y: Double(exercises[x].weight)!)
@@ -66,13 +70,13 @@ class ExerciseGraphDetailViewController: UIViewController {
         }
         
         let line1 = LineChartDataSet(values: lineChartEntry, label: "Weight")
-        line1.setColor(NSUIColor.blue)
+        line1.setColor(NSUIColor.white)
+        line1.circleRadius = 3
+        line1.drawCircleHoleEnabled = false
         
         let data = LineChartData()
         data.addDataSet(line1)
-        
-        data.setValueFont(NSUIFont(name: "DJBCHALKITUP", size: 18))
-        data.setValueTextColor(NSUIColor.white)
+    
         chartView.data = data
     }
     
