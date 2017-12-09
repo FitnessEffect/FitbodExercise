@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FitbodExercise/Controller/Calculations.swift"
-            timestampString = "534501726.822199"
+            timestampString = "534513080.80447"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "calculateTheoreticalOneRepMax(weight:reps:completion:)"
             landmarkType = "7">
          </BreakpointContent>

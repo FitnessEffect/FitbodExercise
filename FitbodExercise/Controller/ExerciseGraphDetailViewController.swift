@@ -35,7 +35,6 @@ class ExerciseGraphDetailViewController: UIViewController {
         exerciseSubtitle.text = displayExerciseSubtitle
         exercisePredictedOneRepMax.text = displayExercisePredictedOneRepMax
         
-        
         //filter exercises by exercise names
         retrieveRelevantExercises()
         
@@ -81,7 +80,7 @@ class ExerciseGraphDetailViewController: UIViewController {
         chartView.backgroundColor = UIColor.black
         
         for x in 0...exercises.count-1{
-            let dataEntry = ChartDataEntry(x: Double(x), y: Double(exercises[x].weight)!)
+            let dataEntry = ChartDataEntry(x: Double(x), y: Calculations.calculateTheoreticalOneRepMax(weight: exercises[x].weight, reps: exercises[x].reps))
             lineChartEntry.append(dataEntry)
         }
         
@@ -92,7 +91,6 @@ class ExerciseGraphDetailViewController: UIViewController {
         
         let data = LineChartData()
         data.addDataSet(line1)
-    
         chartView.data = data
     }
     

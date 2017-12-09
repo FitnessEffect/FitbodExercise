@@ -66,7 +66,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        print("here")
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
