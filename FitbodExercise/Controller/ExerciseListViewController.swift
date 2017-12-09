@@ -54,9 +54,11 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                                         self.exercisePredictedOneRepMaxDictionary[exerciseData[1]] = result
                                     }
                                 }
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
                             })
                         }
-                        tableView.reloadData()
                     }
                 }
             } catch {
