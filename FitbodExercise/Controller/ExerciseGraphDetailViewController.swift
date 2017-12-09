@@ -22,12 +22,19 @@ class ExerciseGraphDetailViewController: UIViewController {
     var displayExerciseSubtitle:String!
     var displayExercisePredictedOneRepMax:String!
     var lineChartEntry = [ChartDataEntry]()
+    var xAxisFormatDelegate: IAxisValueFormatter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        relevantExercises.removeAll()
         exerciseName.text = displayExerciseName
         exerciseSubtitle.text = displayExerciseSubtitle
         exercisePredictedOneRepMax.text = displayExercisePredictedOneRepMax
+        
         
         //filter exercises by exercise names
         retrieveRelevantExercises()
@@ -36,6 +43,15 @@ class ExerciseGraphDetailViewController: UIViewController {
         relevantExercises = relevantExercises.reversed()
         
         createChart(exercises: relevantExercises)
+        
+        xAxisFormatDelegate = self as? IAxisValueFormatter
+        let xaxis = chartView.xAxis
+        xaxis.valueFormatter = xAxisFormatDelegate
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+
     }
     
     func retrieveRelevantExercises(){
@@ -53,7 +69,7 @@ class ExerciseGraphDetailViewController: UIViewController {
         chartView.xAxis.drawLabelsEnabled = true
         chartView.xAxis.axisMinimum = 0.0
         chartView.xAxis.axisMaximum = Double(exercises.count+1)
-        chartView.xAxis.labelCount = 10
+        chartView.xAxis.labelCount = 6
         chartView.legend.enabled = false
         chartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
         chartView.leftAxis.labelFont = UIFont(name: "Avenir", size: 15)!
@@ -90,4 +106,12 @@ class ExerciseGraphDetailViewController: UIViewController {
         self.exercises = exercises
     }
     
+}
+
+// MARK: axisFormatDelegate
+extension ExerciseListViewController: IAxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        
+        return String(value)
+    }
 }

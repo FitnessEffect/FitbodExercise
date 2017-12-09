@@ -14,19 +14,16 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     
     var exercises = [Exercise]()
     var uniqueExercises = [String]()
+    
     var exercisePredictedOneRepMaxDictionary = [String:Float]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        
         if let url = Bundle.main.url(forResource:"workoutData", withExtension: "txt") {
             do {
                 let data = try Data(contentsOf:url)
@@ -44,11 +41,11 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                             uniqueExercises.append(exerciseData[1])
                             exercisePredictedOneRepMaxDictionary[exerciseData[1]] = 0
                         }
-                         exercises.append(tempExercise)
+                        exercises.append(tempExercise)
                         
                         //Calculate theoretical One Rep Max on seperate thread
                         DispatchQueue.global(qos: .userInitiated).async {
-                        
+                            
                             Calculations.calculateTheoreticalOneRepMax(weight: exerciseData[4], reps:exerciseData[3], completion: {result in
                                 //closure
                                 if let value = self.exercisePredictedOneRepMaxDictionary[exerciseData[1]]{
@@ -65,6 +62,11 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                 print(error)
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,3 +98,5 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
 
 
 }
+
+
