@@ -12,8 +12,6 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var tableView: UITableView!
     
-    var exercises = [Exercise]()
-    var uniqueExercises = [String]()
     var exercisePredictedOneRepMaxDictionary = [String:Float]()
     
     override func viewDidLoad() {
@@ -30,19 +28,21 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                 let attibutedString = try NSAttributedString(data: data, documentAttributes: nil)
                 let fullText = attibutedString.string
                 let file = fullText.components(separatedBy: CharacterSet.newlines)
-                uniqueExercises.removeAll()
+                ExerciseManager.shared.removeAllUniqueExercises()
                 for line in file {
                     if line != " " && line != ""{
                         let exerciseData = line.components(separatedBy: ",")
                         let tempExercise = Exercise(date: exerciseData[0], name: exerciseData[1], sets: exerciseData[2], reps: exerciseData[3], weight: exerciseData[4])
                         
                         //form list of unique exercise names
-                        if !uniqueExercises.contains(exerciseData[1]){
-                            uniqueExercises.append(exerciseData[1])
+                        if !ExerciseManager.shared.uniqueExerciseNames.contains(exerciseData[1]){
+                            ExerciseManager.shared.appendExerciseNameToUniqueExerciseNames(exerciseName: exerciseData[1])
                             //initialize predictedOneRepMax to 0
                             exercisePredictedOneRepMaxDictionary[exerciseData[1]] = 0
                         }
-                        exercises.append(tempExercise)
+                        
+                        ExerciseManager.shared.appendExerciseToExercises(exercise: tempExercise)
+                        //exercises.append(tempExercise)
                         
                         //Calculate theoretical One Rep Max on seperate thread to free up UI
                         DispatchQueue.global(qos: .userInitiated).async {
@@ -80,23 +80,25 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return uniqueExercises.count
+        return ExerciseManager.shared.uniqueExerciseNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath) as! ExerciseTableViewCell
-        cell.exerciseName.text = uniqueExercises[indexPath.row]
+        cell.exerciseName.text = ExerciseManager.shared.uniqueExerciseNames[indexPath.row]
         cell.exerciseSubtitle.text = "One Rep Max • lbs"
-        cell.exercisePredictedOneRepMax.text = String(describing: Int(exercisePredictedOneRepMaxDictionary[uniqueExercises[indexPath.row]]!))
+        cell.exercisePredictedOneRepMax.text = String(describing: Int(exercisePredictedOneRepMaxDictionary[ExerciseManager.shared.uniqueExerciseNames[indexPath.row]]!))
         return cell
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedRow = tableView.indexPathForSelectedRow
         let cell = tableView.cellForRow(at: selectedRow!) as! ExerciseTableViewCell
-        let exerciseGraphDetailVC:ExerciseGraphDetailViewController = segue.destination as! ExerciseGraphDetailViewController
-         exerciseGraphDetailVC.setPassedExercisesInfo(name:cell.exerciseName.text!, subtitle: cell.exerciseSubtitle.text!, predictedOneRepMax:cell.exercisePredictedOneRepMax.text!)
-        exerciseGraphDetailVC.setAllExercises(exercises:exercises)
+        //let exerciseGraphDetailVC:ExerciseGraphDetailViewController = segue.destination as! ExerciseGraphDetailViewController
+        ExerciseManager.shared.setPassedCellName(cellName: cell.exerciseName.text!)
+        ExerciseManager.shared.setPassedCellSubtitle(cellSubtitle: cell.exerciseSubtitle.text!)
+        ExerciseManager.shared.setPassedCellTheoreticalOneRepMax(cellTheoreticalOneRepMax: cell.exercisePredictedOneRepMax.text!)
+         //exerciseGraphDetailVC.setPassedExercisesInfo(name:cell.exerciseName.text!, subtitle: cell.exerciseSubtitle.text!, predictedOneRepMax:cell.exercisePredictedOneRepMax.text!)
     }
 }
 

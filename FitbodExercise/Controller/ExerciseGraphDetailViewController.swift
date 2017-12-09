@@ -16,36 +16,32 @@ class ExerciseGraphDetailViewController: UIViewController{
     @IBOutlet weak var exerciseSubtitle: UILabel!
     @IBOutlet weak var exercisePredictedOneRepMax: UILabel!
     
-    var exercises = [Exercise]()
     var relevantExercises = [Exercise]()
-    var displayExerciseName:String!
-    var displayExerciseSubtitle:String!
-    var displayExercisePredictedOneRepMax:String!
     var lineChartEntry = [ChartDataEntry]()
     var xAxisFormatDelegate: IAxisValueFormatter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        xAxisFormatDelegate = self
+        let xaxis = chartView.xAxis
+        xaxis.valueFormatter = xAxisFormatDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         relevantExercises.removeAll()
-        exerciseName.text = displayExerciseName
-        exerciseSubtitle.text = displayExerciseSubtitle
-        exercisePredictedOneRepMax.text = displayExercisePredictedOneRepMax
+        
+        exerciseName.text = ExerciseManager.shared.passedCellName
+        exerciseSubtitle.text = ExerciseManager.shared.passedCellSubtitle
+        exercisePredictedOneRepMax.text = ExerciseManager.shared.passedCellTheoreticalOneRepMax
         
         //filter exercises by exercise names
-        relevantExercises = Calculations.retrieveRelevantExercises(name: exerciseName.text!, exercises: exercises)
+        relevantExercises = Calculations.retrieveRelevantExercises(name: exerciseName.text!, exercises: ExerciseManager.shared.exercises)
         
         //reverse array order of exercise from oldest to newest
         relevantExercises = relevantExercises.reversed()
         
         createChart(exercises: relevantExercises)
-        
-        xAxisFormatDelegate = self
-        let xaxis = chartView.xAxis
-        xaxis.valueFormatter = xAxisFormatDelegate
     }
 
     func createChart(exercises:[Exercise]){
@@ -80,22 +76,11 @@ class ExerciseGraphDetailViewController: UIViewController{
         data.addDataSet(line1)
         chartView.data = data
     }
-    
-    func setPassedExercisesInfo(name:String, subtitle:String, predictedOneRepMax:String){
-        self.displayExerciseName = name
-        self.displayExerciseSubtitle = subtitle
-        self.displayExercisePredictedOneRepMax = predictedOneRepMax
-    }
-    
-    func setAllExercises(exercises:[Exercise]){
-        self.exercises = exercises
-    }
 }
 
-// MARK: axisFormatDelegate
+//xAxisFormatDelegate
 extension ExerciseGraphDetailViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        
         return String(describing: relevantExercises[Int(value)].date!)
     }
 }
