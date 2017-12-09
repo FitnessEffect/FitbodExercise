@@ -22,7 +22,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationController?.view.backgroundColor = .clear
         
         //retrieve exercises from workoutData file
-        if let url = Bundle.main.url(forResource:"workoutDataTest", withExtension: "txt") {
+        if let url = Bundle.main.url(forResource:"workoutData", withExtension: "txt") {
             do {
                 let data = try Data(contentsOf:url)
                 let attibutedString = try NSAttributedString(data: data, documentAttributes: nil)
@@ -38,24 +38,22 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                         //form list of unique exercise names
                         if !ExerciseManager.shared.uniqueExerciseNames.contains(exerciseData[1]){
                             ExerciseManager.shared.appendExerciseNameToUniqueExerciseNames(exerciseName: exerciseData[1])
-                            //initialize predictedOneRepMax to 0
-                            exercisePredictedOneRepMaxDictionary[exerciseData[1]] = 0
+                            //initialize predictedOneRepMax to -1
+                            exercisePredictedOneRepMaxDictionary[exerciseData[1]] = -1
                         }
                         
                         ExerciseManager.shared.appendExerciseToExercises(exercise: tempExercise)
-                        //exercises.append(tempExercise)
                         
                         //Calculate theoretical One Rep Max on seperate thread to free up UI
                         DispatchQueue.global(qos: .userInitiated).async {
-                            
                             Calculations.calculateTheoreticalOneRepMax(weight: exerciseData[4], reps:exerciseData[3], completion: {result in
-                                //closure
-                                if let value = self.exercisePredictedOneRepMaxDictionary[exerciseData[1]]{
-                                    if result > value{
-                                        self.exercisePredictedOneRepMaxDictionary[exerciseData[1]] = result
-                                    }
-                                }
                                 DispatchQueue.main.async {
+                                    //closure
+                                    if let value = self.exercisePredictedOneRepMaxDictionary[exerciseData[1]]{
+                                        if result > value{
+                                            self.exercisePredictedOneRepMaxDictionary[exerciseData[1]] = result
+                                        }
+                                    }
                                     self.tableView.reloadData()
                                 }
                             })

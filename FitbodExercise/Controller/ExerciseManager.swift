@@ -19,7 +19,6 @@ class ExerciseManager{
     private var _passedCellSubtitle = String()
     private var _passedCellTheoreticalOneRepMax = String()
     
-    
     func retrieveRelevantExercises(){
         for exercise in _exercises{
             if exercise.name == _passedCellName{
