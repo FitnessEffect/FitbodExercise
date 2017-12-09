@@ -36,7 +36,7 @@ class ExerciseGraphDetailViewController: UIViewController {
         exercisePredictedOneRepMax.text = displayExercisePredictedOneRepMax
         
         //filter exercises by exercise names
-        retrieveRelevantExercises()
+        relevantExercises = Calculations.retrieveRelevantExercises(name: exerciseName.text!, exercises: exercises)
         
         //reverse array order of exercise from oldest to newest
         relevantExercises = relevantExercises.reversed()
@@ -48,13 +48,7 @@ class ExerciseGraphDetailViewController: UIViewController {
 //        xaxis.valueFormatter = xAxisFormatDelegate
     }
 
-    func retrieveRelevantExercises(){
-        for exercise in exercises{
-            if exercise.name == exerciseName.text{
-                relevantExercises.append(exercise)
-            }
-        }
-    }
+
     
     func createChart(exercises:[Exercise]){
         lineChartEntry.removeAll()

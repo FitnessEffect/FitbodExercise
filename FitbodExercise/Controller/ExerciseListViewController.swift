@@ -18,7 +18,6 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -40,11 +39,12 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                         //form list of unique exercise names
                         if !uniqueExercises.contains(exerciseData[1]){
                             uniqueExercises.append(exerciseData[1])
+                            //initialize predictedOneRepMax to 0
                             exercisePredictedOneRepMaxDictionary[exerciseData[1]] = 0
                         }
                         exercises.append(tempExercise)
                         
-                        //Calculate theoretical One Rep Max on seperate thread
+                        //Calculate theoretical One Rep Max on seperate thread to free up UI
                         DispatchQueue.global(qos: .userInitiated).async {
                             
                             Calculations.calculateTheoreticalOneRepMax(weight: exerciseData[4], reps:exerciseData[3], completion: {result in
