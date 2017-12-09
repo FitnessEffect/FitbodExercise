@@ -20,6 +20,7 @@
 		524024A31FDBAB500095E6CD /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524024A21FDBAB500095E6CD /* ExerciseListViewController.swift */; };
 		524024A61FDBBBFB0095E6CD /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524024A51FDBBBFB0095E6CD /* Calculations.swift */; };
 		524024A81FDC71750095E6CD /* ExerciseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524024A71FDC71750095E6CD /* ExerciseManager.swift */; };
+		524024AA1FDC82D80095E6CD /* workoutDataTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 524024A91FDC82D80095E6CD /* workoutDataTest.txt */; };
 		68DA0197F6D7FEAA106CAE5C /* Pods_FitbodExercise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD3E02063B18DD68A45837C /* Pods_FitbodExercise.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		524024A21FDBAB500095E6CD /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		524024A51FDBBBFB0095E6CD /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 		524024A71FDC71750095E6CD /* ExerciseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseManager.swift; sourceTree = "<group>"; };
+		524024A91FDC82D80095E6CD /* workoutDataTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = workoutDataTest.txt; sourceTree = "<group>"; };
 		6F02D078E6BEFFD6B6C3111E /* Pods-FitbodExercise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitbodExercise.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitbodExercise/Pods-FitbodExercise.release.xcconfig"; sourceTree = "<group>"; };
 		96BEB5608132A69C00ED6734 /* Pods-FitbodExerciseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitbodExerciseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitbodExerciseTests/Pods-FitbodExerciseTests.release.xcconfig"; sourceTree = "<group>"; };
 		A1B4B284B755B92D67B2EDF3 /* Pods-FitbodExercise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitbodExercise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitbodExercise/Pods-FitbodExercise.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				524024921FDBA1AE0095E6CD /* workoutData.txt */,
+				524024A91FDC82D80095E6CD /* workoutDataTest.txt */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				5240247C1FDB9CB40095E6CD /* LaunchScreen.storyboard in Resources */,
 				524024791FDB9CB40095E6CD /* Assets.xcassets in Resources */,
+				524024AA1FDC82D80095E6CD /* workoutDataTest.txt in Resources */,
 				524024931FDBA1AE0095E6CD /* workoutData.txt in Resources */,
 				524024771FDB9CB40095E6CD /* Main.storyboard in Resources */,
 			);

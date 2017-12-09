@@ -61,6 +61,9 @@ class ExerciseGraphDetailViewController: UIViewController{
         chartView.xAxis.labelTextColor = UIColor.white
         chartView.backgroundColor = UIColor.black
         
+        chartView.xAxis.granularityEnabled = true
+        chartView.xAxis.granularity = 1
+        
         for x in 0...exercises.count-1{
             let dataEntry = ChartDataEntry(x: Double(x), y: Calculations.calculateTheoreticalOneRepMax(weight: exercises[x].weight, reps: exercises[x].reps))
             lineChartEntry.append(dataEntry)
@@ -81,6 +84,10 @@ class ExerciseGraphDetailViewController: UIViewController{
 //xAxisFormatDelegate
 extension ExerciseGraphDetailViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        //return "" if value is greater than the amount of exercises in relevantExercises
+        if Int(value) >= ExerciseManager.shared.relevantExercises.count{
+            return ""
+        }
         return String(describing: ExerciseManager.shared.relevantExercises[Int(value)].date!)
     }
 }

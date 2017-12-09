@@ -22,7 +22,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationController?.view.backgroundColor = .clear
         
         //retrieve exercises from workoutData file
-        if let url = Bundle.main.url(forResource:"workoutData", withExtension: "txt") {
+        if let url = Bundle.main.url(forResource:"workoutDataTest", withExtension: "txt") {
             do {
                 let data = try Data(contentsOf:url)
                 let attibutedString = try NSAttributedString(data: data, documentAttributes: nil)
