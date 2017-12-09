@@ -9,7 +9,6 @@
 import Foundation
 
 class Calculations{
-    
     static func calculateTheoreticalOneRepMax(weight:String, reps:String, completion:@escaping (Float)->Void){
         let result = Double(weight)!*((36/(37-Double(reps)!)))
         completion(Float(result))

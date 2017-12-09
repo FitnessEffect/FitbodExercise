@@ -14,16 +14,17 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     
     var exercises = [Exercise]()
     var uniqueExercises = [String]()
-    
     var exercisePredictedOneRepMaxDictionary = [String:Float]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
         
+        //retrieve exercises from workoutData file
         if let url = Bundle.main.url(forResource:"workoutData", withExtension: "txt") {
             do {
                 let data = try Data(contentsOf:url)
@@ -66,7 +67,10 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print("here")
+        //clears selection when navigating back
+        if tableView.indexPathForSelectedRow != nil{
+            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,18 +89,13 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedRow = tableView.indexPathForSelectedRow
         let cell = tableView.cellForRow(at: selectedRow!) as! ExerciseTableViewCell
-        
         let exerciseGraphDetailVC:ExerciseGraphDetailViewController = segue.destination as! ExerciseGraphDetailViewController
          exerciseGraphDetailVC.setPassedExercisesInfo(name:cell.exerciseName.text!, subtitle: cell.exerciseSubtitle.text!, predictedOneRepMax:cell.exercisePredictedOneRepMax.text!)
         exerciseGraphDetailVC.setAllExercises(exercises:exercises)
-        
     }
-
-
 }
 
 

@@ -43,16 +43,11 @@ class ExerciseGraphDetailViewController: UIViewController {
         
         createChart(exercises: relevantExercises)
         
-        xAxisFormatDelegate = self as? IAxisValueFormatter
-        let xaxis = chartView.xAxis
-        xaxis.valueFormatter = xAxisFormatDelegate
+//        xAxisFormatDelegate = self as? IAxisValueFormatter
+//        let xaxis = chartView.xAxis
+//        xaxis.valueFormatter = xAxisFormatDelegate
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
 
-    }
-    
     func retrieveRelevantExercises(){
         for exercise in exercises{
             if exercise.name == exerciseName.text{
@@ -103,7 +98,6 @@ class ExerciseGraphDetailViewController: UIViewController {
     func setAllExercises(exercises:[Exercise]){
         self.exercises = exercises
     }
-    
 }
 
 // MARK: axisFormatDelegate
