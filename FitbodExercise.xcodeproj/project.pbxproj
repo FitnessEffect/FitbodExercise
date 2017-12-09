@@ -13,6 +13,7 @@
 		524024791FDB9CB40095E6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524024781FDB9CB40095E6CD /* Assets.xcassets */; };
 		5240247C1FDB9CB40095E6CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5240247A1FDB9CB40095E6CD /* LaunchScreen.storyboard */; };
 		524024871FDB9CB40095E6CD /* FitbodExerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524024861FDB9CB40095E6CD /* FitbodExerciseTests.swift */; };
+		524024931FDBA1AE0095E6CD /* workoutData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 524024921FDBA1AE0095E6CD /* workoutData.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		524024821FDB9CB40095E6CD /* FitbodExerciseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitbodExerciseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		524024861FDB9CB40095E6CD /* FitbodExerciseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitbodExerciseTests.swift; sourceTree = "<group>"; };
 		524024881FDB9CB40095E6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		524024921FDBA1AE0095E6CD /* workoutData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = workoutData.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		524024701FDB9CB40095E6CD /* FitbodExercise */ = {
 			isa = PBXGroup;
 			children = (
+				524024911FDBA1930095E6CD /* Data */,
 				524024711FDB9CB40095E6CD /* AppDelegate.swift */,
 				524024731FDB9CB40095E6CD /* ViewController.swift */,
 				524024751FDB9CB40095E6CD /* Main.storyboard */,
@@ -94,6 +97,14 @@
 				524024881FDB9CB40095E6CD /* Info.plist */,
 			);
 			path = FitbodExerciseTests;
+			sourceTree = "<group>";
+		};
+		524024911FDBA1930095E6CD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				524024921FDBA1AE0095E6CD /* workoutData.txt */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 			files = (
 				5240247C1FDB9CB40095E6CD /* LaunchScreen.storyboard in Resources */,
 				524024791FDB9CB40095E6CD /* Assets.xcassets in Resources */,
+				524024931FDBA1AE0095E6CD /* workoutData.txt in Resources */,
 				524024771FDB9CB40095E6CD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
