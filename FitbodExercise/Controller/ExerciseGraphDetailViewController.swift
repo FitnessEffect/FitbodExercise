@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class ExerciseGraphDetailViewController: UIViewController {
+class ExerciseGraphDetailViewController: UIViewController{
     
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var exerciseName: UILabel!
@@ -43,13 +43,11 @@ class ExerciseGraphDetailViewController: UIViewController {
         
         createChart(exercises: relevantExercises)
         
-//        xAxisFormatDelegate = self as? IAxisValueFormatter
-//        let xaxis = chartView.xAxis
-//        xaxis.valueFormatter = xAxisFormatDelegate
+        xAxisFormatDelegate = self
+        let xaxis = chartView.xAxis
+        xaxis.valueFormatter = xAxisFormatDelegate
     }
 
-
-    
     func createChart(exercises:[Exercise]){
         lineChartEntry.removeAll()
         chartView.chartDescription?.text = ""
@@ -57,14 +55,14 @@ class ExerciseGraphDetailViewController: UIViewController {
         chartView.xAxis.drawLabelsEnabled = true
         chartView.xAxis.axisMinimum = 0.0
         chartView.xAxis.axisMaximum = Double(exercises.count+1)
-        chartView.xAxis.labelCount = 6
+        chartView.xAxis.labelCount = 4
         chartView.legend.enabled = false
         chartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
-        chartView.leftAxis.labelFont = UIFont(name: "Avenir", size: 15)!
+        chartView.leftAxis.labelFont = UIFont(name: "Avenir", size: 12)!
         chartView.leftAxis.labelTextColor = UIColor.white
-        chartView.rightAxis.labelFont = UIFont(name: "Avenir", size: 15)!
+        chartView.rightAxis.labelFont = UIFont(name: "Avenir", size: 12)!
         chartView.rightAxis.labelTextColor = UIColor.white
-        chartView.xAxis.labelFont = UIFont(name: "Avenir", size: 15)!
+        chartView.xAxis.labelFont = UIFont(name: "Avenir", size: 10)!
         chartView.xAxis.labelTextColor = UIColor.white
         chartView.backgroundColor = UIColor.black
         
@@ -95,9 +93,9 @@ class ExerciseGraphDetailViewController: UIViewController {
 }
 
 // MARK: axisFormatDelegate
-extension ExerciseListViewController: IAxisValueFormatter {
+extension ExerciseGraphDetailViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         
-        return String(value)
+        return String(describing: relevantExercises[Int(value)].date!)
     }
 }
