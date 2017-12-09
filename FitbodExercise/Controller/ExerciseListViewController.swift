@@ -14,6 +14,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     
     var exercises = [Exercise]()
     var uniqueExercises = [String]()
+    var exercisePredictedOneRepMaxDictionary = [String:Float]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +32,29 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
                 uniqueExercises.removeAll()
                 for line in file {
                     if line != " " && line != ""{
-                        let tempArr = line.components(separatedBy: ",")
-                        let tempExercise = Exercise(date: tempArr[0], name: tempArr[1], sets: tempArr[2], reps: tempArr[3], weight: tempArr[4])
+                        let exerciseData = line.components(separatedBy: ",")
+                        let tempExercise = Exercise(date: exerciseData[0], name: exerciseData[1], sets: exerciseData[2], reps: exerciseData[3], weight: exerciseData[4])
                         
                         //form list of unique exercise names
-                        if !uniqueExercises.contains(tempArr[1]){
-                            uniqueExercises.append(tempArr[1])
+                        if !uniqueExercises.contains(exerciseData[1]){
+                            uniqueExercises.append(exerciseData[1])
+                            exercisePredictedOneRepMaxDictionary[exerciseData[1]] = 0
                         }
-                        exercises.append(tempExercise)
+                         exercises.append(tempExercise)
+                        
+                        //Calculate theoretical One Rep Max on seperate thread
+                        DispatchQueue.global(qos: .userInitiated).async {
+                        
+                            Calculations.calculateTheoreticalOneRepMax(weight: exerciseData[4], reps:exerciseData[3], completion: {result in
+                                //closure
+                                if let value = self.exercisePredictedOneRepMaxDictionary[exerciseData[1]]{
+                                    if result > value{
+                                        self.exercisePredictedOneRepMaxDictionary[exerciseData[1]] = result
+                                    }
+                                }
+                            })
+                        }
+                        tableView.reloadData()
                     }
                 }
             } catch {
@@ -46,10 +62,9 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("here")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +79,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath) as! ExerciseTableViewCell
         cell.exerciseName.text = uniqueExercises[indexPath.row]
         cell.exerciseSubtitle.text = "One Rep Max • lbs"
-        cell.exercisePredictedOneRepMax.text = "315"
+        cell.exercisePredictedOneRepMax.text = String(describing: Int(exercisePredictedOneRepMaxDictionary[uniqueExercises[indexPath.row]]!))
         return cell
     }
 

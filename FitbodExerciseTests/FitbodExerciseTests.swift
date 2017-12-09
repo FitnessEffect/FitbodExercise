@@ -33,4 +33,12 @@ class FitbodExerciseTests: XCTestCase {
         }
     }
     
+    func testCalculateTheoreticalOneRepMax(){
+        var tempDictionary = ["":Float(0)]
+        let result = FitbodExercise.Calculations.calculateTheoreticalOneRepMax(name:String, weight:"135", reps:"10")
+        let expectedResult:Float = 180
+        
+        XCTAssertEqual(result, expectedResult)
+    }
+    
 }
