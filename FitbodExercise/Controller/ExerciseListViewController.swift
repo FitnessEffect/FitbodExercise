@@ -9,7 +9,7 @@
 import UIKit
 
 class ExerciseListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var exercisePredictedOneRepMaxDictionary = [String:Float]()
@@ -74,7 +74,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -90,7 +90,7 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
         cell.exercisePredictedOneRepMax.text = String(describing: Int(exercisePredictedOneRepMaxDictionary[ExerciseManager.shared.uniqueExerciseNames[indexPath.row]]!))
         return cell
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedRow = tableView.indexPathForSelectedRow
         let cell = tableView.cellForRow(at: selectedRow!) as! ExerciseTableViewCell

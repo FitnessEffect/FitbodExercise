@@ -12,12 +12,13 @@ class ExerciseManager{
     
     static let shared = ExerciseManager()
     
-    private var _exercises = [Exercise]()
-    private var _uniqueExerciseNames = [String]()
+    private var _exercises = [Exercise]() //all exercises from list
+    private var _uniqueExerciseNames = [String]() //single occurance of each exercise name
+    private var _relevantExercises = [Exercise]() //sorted exercise list by exercise name
     private var _passedCellName = String()
     private var _passedCellSubtitle = String()
     private var _passedCellTheoreticalOneRepMax = String()
-    private var _relevantExercises = [Exercise]()
+    
     
     func retrieveRelevantExercises(){
         for exercise in _exercises{

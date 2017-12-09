@@ -137,6 +137,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="zoom" translatesAutoresizingMaskIntoConstraints="NO" id="CJC-tH-lHQ">
+                                <rect key="frame" x="141" y="494" width="93" height="99"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -171,4 +175,7 @@
             <point key="canvasLocation" x="-860" y="99"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="zoom" width="512" height="512"/>
+    </resources>
 </document>
