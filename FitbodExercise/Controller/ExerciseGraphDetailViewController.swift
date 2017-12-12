@@ -38,7 +38,7 @@ class ExerciseGraphDetailViewController: UIViewController{
         ExerciseManager.shared.retrieveRelevantExercises()
         
         //reverse array order of exercise from oldest to newest
-        ExerciseManager.shared.setRelevantExercises(relevantExercises:ExerciseManager.shared.relevantExercises.reversed())
+        ExerciseManager.shared.relevantExercises = ExerciseManager.shared.relevantExercises.reversed()
         
         createChart(exercises: ExerciseManager.shared.relevantExercises)
     }

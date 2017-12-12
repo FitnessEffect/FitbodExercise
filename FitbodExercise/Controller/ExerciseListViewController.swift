@@ -93,8 +93,8 @@ class ExerciseListViewController: UIViewController, UITableViewDelegate, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedRow = tableView.indexPathForSelectedRow
         let cell = tableView.cellForRow(at: selectedRow!) as! ExerciseTableViewCell
-        ExerciseManager.shared.setPassedCellName(cellName: cell.exerciseName.text!)
-        ExerciseManager.shared.setPassedCellSubtitle(cellSubtitle: cell.exerciseSubtitle.text!)
-        ExerciseManager.shared.setPassedCellTheoreticalOneRepMax(cellTheoreticalOneRepMax: cell.exercisePredictedOneRepMax.text!)
+        ExerciseManager.shared.passedCellName = cell.exerciseName.text!
+        ExerciseManager.shared.passedCellSubtitle = cell.exerciseSubtitle.text!
+        ExerciseManager.shared.passedCellTheoreticalOneRepMax = cell.exercisePredictedOneRepMax.text!
     }
 }
